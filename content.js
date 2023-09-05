@@ -1,64 +1,77 @@
-// content.js
 // Define a dictionary to map extracted data
 const goodIngredients = {
-    'shea butter': 'Shea butter is a popular moisturizer for coily hair, known for its ability to hydrate and nourish.',
-    'coconut oil': 'Coconut oil can help reduce frizz and improve hair shine for coily hair types.',
-    'castor oil': 'Castor oil is often used to promote hair growth and strengthen coily hair.',
-    'avocado oil': 'Avocado oil is rich in vitamins and can help with hair moisture and health.',
-    'argan oil': 'Argan oil is known for its ability to add shine and manageability to coily hair.',
-    // Add more key-value pairs for other ingredients
-  };
-  
- // Define a dictionary to map extracted data
+  hair: "this is just for testing",
+  "hair": "this is just for testing",
+  "shea butter":
+    "Shea butter is a popular moisturizer for coily hair, known for its ability to hydrate and nourish.",
+  "coconut oil":
+    "Coconut oil can help reduce frizz and improve hair shine for coily hair types.",
+  "castor oil":
+    "Castor oil is often used to promote hair growth and strengthen coily hair.",
+  "avocado oil":
+    "Avocado oil is rich in vitamins and can help with hair moisture and health.",
+  "argan oil":
+    "Argan oil is known for its ability to add shine and manageability to coily hair.",
+  "water (aqua)":
+    "Water (Aqua) is a common base ingredient in many haircare products.",
+  "oryza sativa (rice water) extract":
+    "Oryza Sativa (Rice Water) Extract is used for its potential benefits on hair health.",
+  glycerin:
+    "Glycerin is a humectant that can help retain moisture in the hair.",
+  "urtica dioica (nettle) extract":
+    "Urtica Dioica (Nettle) Extract may have nourishing properties for the hair.",
+  "honey (mel) wildflower & clover":
+    "Honey (Mel) Wildflower & Clover can provide moisture and shine to the hair.",
+  // Add more key-value pairs for other ingredients
+};
+
+// Define a dictionary to map extracted data
 const badIngredients = {
-    'sulfates': 'Sulfates can strip natural oils from coily hair, leading to dryness and frizz.',
-    'silicones': 'Silicones can create build-up on coily hair, making it appear greasy and heavy.',
-    'mineral oil': 'Mineral oil can weigh down coily hair and prevent moisture absorption.',
-    'isopropyl alcohol': 'Isopropyl alcohol can be drying and irritating to the scalp and hair.',
-    'parabens': 'Parabens may disrupt the natural balance of coily hair and scalp.',
-    // Add more key-value pairs for other ingredients to avoid
-  };
-  
-  
-// Function to extract and process data from the webpage
-function parseWebpage() {
-    // Replace this selector with the appropriate one for your target elements
-    const targetElement = document.querySelector('#Ingredient');
-  
-    if (targetElement) {
-      const extractedText = targetElement.textContent;
-      
-        // Check if the extracted text is a key in the badIngredientsDictionary
-        if (badIngredientsDictionary.hasOwnProperty(extractedText)) {
-            const description = badIngredientsDictionary[extractedText];
+  sulfates:
+    "Sulfates can strip natural oils from coily hair, leading to dryness and frizz.",
+  silicones:
+    "Silicones can create build-up on coily hair, making it appear greasy and heavy.",
+  "mineral oil":
+    "Mineral oil can weigh down coily hair and prevent moisture absorption.",
+  "isopropyl alcohol":
+    "Isopropyl alcohol can be drying and irritating to the scalp and hair.",
+  parabens: "Parabens may disrupt the natural balance of coily hair and scalp.",
+  "phenoxyethanol (optiphen nd)":
+    "Phenoxyethanol (Optiphen ND) is a preservative that may be used in haircare products.",
+  ethylhexylglycerin:
+    "Ethylhexylglycerin is a conditioning agent sometimes found in haircare products.",
+  "phthalate free fragrance":
+    "Phthalate-free fragrance is used to provide a pleasant scent without certain chemicals.",
+  // Add more key-value pairs for other ingredients to avoid
+};
 
-            // Create a popup box with a red background
-            const popup = document.createElement('div');
-            popup.textContent = description;
-            popup.style.backgroundColor = 'red';
-            popup.style.color = 'white';
-            popup.style.position = 'fixed';
-            popup.style.top = '10px';
-            popup.style.left = '10px';
-            popup.style.padding = '10px';
-            popup.style.zIndex = '9999';
+// Function to highlight recognized ingredients with borders on the page
+function highlightIngredients() {
+  // Get all text content from the webpage
+  const allText = document.documentElement.textContent.toLowerCase(); // Convert to lowercase for case-insensitive matching
 
-            // Append the popup to the document body
-            document.body.appendChild(popup);
-
-            // Remove the popup after a few seconds (adjust the delay as needed)
-            setTimeout(() => {
-            document.body.removeChild(popup);
-            }, 60000); // 1 min
-
+  // Split the entire content into words and look for ingredients
+  const words = allText.split(/\s+/); // Split by whitespace
+  for (const word of words) {
+    // Trim and check if the word is in either dictionary
+    const trimmedWord = word.trim();
+    if (goodIngredients.hasOwnProperty(trimmedWord)) {
+      // Highlight recognized "good" ingredients with a green border
+      const element = document.querySelector(`:matches("${trimmedWord}")`);
+      if (element) {
+        element.style.border = "2px solid green";
+      } else if (badIngredients.hasOwnProperty(trimmedWord)) {
+        // Highlight recognized "bad" ingredients with a red border
+        const element = document.querySelector(`:matches("${trimmedWord}")`);
+        if (element) {
+          element.style.border = "2px solid red";
+        } else {
+          document.body.style.border = "4px solid yellow"; // Set a 4px yellow border
         }
-     }
+      }
+    }
   }
-  
-  // Execute the parsing function when the page is fully loaded
-  window.addEventListener('load', parseWebpage);
-  
-  // You can also listen for specific events or execute code based on user interactions, e.g., a button click
-  // Example:
-  // document.getElementById('myButton').addEventListener('click', parseWebpage);
-  
+}
+
+// Execute the highlighting function when the page is fully loaded
+window.addEventListener("load", highlightIngredients);
