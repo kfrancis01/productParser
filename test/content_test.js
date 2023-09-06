@@ -1,4 +1,3 @@
-
 // Define a dictionary to map extracted data
 const goodIngredients = {
     hair: "this is just for testing",
@@ -63,8 +62,9 @@ function highlightIngredientsInSections(textToMatch, borderColor, sectionHeaders
 }
 
 // Usage example:
-const sectionHeaders = ["gourmet ingredients:", "full ingredient list"];
+const sectionHeaders = ["gourmet ingredients:", "full ingredient list", "ingredients"];
 highlightIngredientsInSections("Water", "green", sectionHeaders);
   
   // Execute the highlighting function when the page is fully loaded
   window.addEventListener("load", highlightIngredients);
+  

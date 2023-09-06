@@ -45,33 +45,56 @@ const badIngredients = {
   // Add more key-value pairs for other ingredients to avoid
 };
 
-// Function to highlight recognized ingredients with borders on the page
-function highlightIngredients() {
-  // Get all text content from the webpage
-  const allText = document.documentElement.textContent.toLowerCase(); // Convert to lowercase for case-insensitive matching
+// // Function to highlight recognized ingredients with borders on the page
+// function highlightIngredients() {
+//   // Get all text content from the webpage
+//   const allText = document.documentElement.textContent.toLowerCase(); // Convert to lowercase for case-insensitive matching
 
-  // Split the entire content into words and look for ingredients
-  const words = allText.split(/\s+/); // Split by whitespace
-  for (const word of words) {
-    // Trim and check if the word is in either dictionary
-    const trimmedWord = word.trim();
-    if (goodIngredients.hasOwnProperty(trimmedWord)) {
-      // Highlight recognized "good" ingredients with a green border
-      const element = document.querySelector(`:matches("${trimmedWord}")`);
-      if (element) {
-        element.style.border = "2px solid green";
-      } else if (badIngredients.hasOwnProperty(trimmedWord)) {
-        // Highlight recognized "bad" ingredients with a red border
-        const element = document.querySelector(`:matches("${trimmedWord}")`);
-        if (element) {
-          element.style.border = "2px solid red";
-        } else {
-          document.body.style.border = "4px solid yellow"; // Set a 4px yellow border
-        }
-      }
+//   // Split the entire content into words and look for ingredients
+//   const words = allText.split(/\s+/); // Split by whitespace
+//   for (const word of words) {
+//     // Trim and check if the word is in either dictionary
+//     const trimmedWord = word.trim();
+//     if (goodIngredients.hasOwnProperty(trimmedWord)) {
+//       // Highlight recognized "good" ingredients with a green border
+//       const element = document.querySelector(`:matches("${trimmedWord}")`);
+//       if (element) {
+//         element.style.border = "2px solid green";
+//       } else if (badIngredients.hasOwnProperty(trimmedWord)) {
+//         // Highlight recognized "bad" ingredients with a red border
+//         const element = document.querySelector(`:matches("${trimmedWord}")`);
+//         if (element) {
+//           element.style.border = "2px solid red";
+//         } else {
+//           document.body.style.border = "4px solid yellow"; // Set a 4px yellow border
+//         }
+//       }
+//     }
+//   }
+// }
+
+// // Execute the highlighting function when the page is fully loaded
+// window.addEventListener("load", highlightIngredients);
+
+// Function to highlight recognized ingredients with borders on the page
+function highlightIngredientsInSections(textToMatch, borderColor, sectionHeaders) {
+  const elements = document.querySelectorAll('*'); // Select all elements in the page
+  let insideSection = false;
+
+  elements.forEach((element) => {
+    if (sectionHeaders.includes(element.textContent.trim().toLowerCase())) {
+      insideSection = true;
+    } else if (insideSection && element.textContent.includes(textToMatch)) {
+      element.style.border = `2px solid ${borderColor}`;
+    } else if (sectionHeaders.includes(element.textContent.trim().toLowerCase())) {
+      insideSection = false;
     }
-  }
+  });
 }
 
-// Execute the highlighting function when the page is fully loaded
-window.addEventListener("load", highlightIngredients);
+// Usage example:
+const sectionHeaders = ["gourmet ingredients:", "full ingredient list", "ingredients"];
+highlightIngredientsInSections("Water", "green", sectionHeaders);
+  
+  // Execute the highlighting function when the page is fully loaded
+  window.addEventListener("load", highlightIngredients);
