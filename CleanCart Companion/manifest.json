@@ -1,0 +1,22 @@
+{
+  "description": "Adds a color coordinated popup that explains if the product's ingredients are bad, good, or inbetween",
+  "manifest_version": 3,
+  "name": "CleanCart Companion",
+  "version": "1.0",
+  "permissions": ["activeTab"],
+  
+  "icons": {
+    "48": "icon/CCC.png"
+  },
+
+  "options_ui": {
+    "page": "settings.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

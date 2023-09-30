@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Preferences</title>
+    <link rel="stylesheet" href="settings.css" />
+    <style>
+      body {
+        background-color: rgba(2, 1, 28, 0.859);
+        color: rgb(236, 234, 234);
+      }
+
+      /* Style the label and checkbox for proper alignment */
+      label {
+        display: flex; /* Use flexbox for alignment */
+        align-items: center; /* Center vertically */
+      }
+
+      /* Optional: Add some spacing between label and checkbox */
+      .sliding-toggle {
+        margin-right: 10px; /* Adjust as needed */
+      }
+    </style>
+  </head>
+  <body>
+    <h4>Control popup information</h4>
+    <p>
+      When this is switched on the popup box will have a paw print icon to
+      indicate that the product is cruelty-free. Otherwise the popup box will
+      not have the paw print icon.
+    </p>
+    <input type="checkbox" id="cruelty-free-toggle" class="sliding-toggle" />
+    <label for="cruelty-free-toggle">Cruelty-Free</label>
+    <div class="slider"></div>
+    <div class="divider"></div>
+    <p>
+      When this is switched on the popup box will have a vegan icon if the
+      product is vegan; otherwise the icon will not show up.
+    </p>
+    <input type="checkbox" id="vegan-toggle" class="sliding-toggle" />
+    <label for="vegan-toggle">Vegan</label>
+    <div class="slider"></div>
+    <div class="divider"></div>
+    <p>
+      The popup border will turn red if the product is found to not be
+      eco-friendly.
+    </p>
+    <input type="checkbox" id="eco-toggle" class="sliding-toggle" />
+    <label for="eco-toggle">Eco-Friendly Packaging</label>
+    <div class="slider"></div>
+    <div class="divider"></div>
+    <p>
+      A smiley face will be added to the popup if this product will not break
+      you out.
+    </p>
+    <input type="checkbox" id="comedogenic-toggle" class="sliding-toggle" />
+    <label for="non-comedogenic-toggle">Comedogenic</label>
+    <div class="slider"></div>
+    <div class="divider"></div>
+  </body>
+</html>

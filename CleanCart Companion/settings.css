@@ -1,0 +1,38 @@
+.sliding-toggle {
+    display: none;
+  }
+  
+  .slider {
+    position: relative;
+    width: 30px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: rgba(7, 7, 7, 0.687);
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: rgba(246, 244, 244, 0.782);
+    border: 2px solid #999; /* Add border styles here */
+    transition: all 0.3s ease-in-out;
+    transform: translateX(0px);
+  }
+  
+  .sliding-toggle:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  .sliding-toggle:checked + .slider:before {
+    transform: translateX(30px);
+  }
+
+  .divider {
+    width: 600px; /* Adjust the width of the divider line */
+    height: 1px; /* Adjust the height of the divider line */
+    background-color: #999; /* Change the divider color */
+    margin: 0 0px; /* Adjust the left and right margin for spacing */
+  }
